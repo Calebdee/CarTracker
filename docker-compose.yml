@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  cars-frontend:
+    build: ./frontend
+    container_name: cars-frontend
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - cars-backend
+
+  cars-backend:
+    build: ./backend
+    container_name: cars-backend
+    restart: always
+    ports:
+      - "5002:5002"
+    environment:
+      PORT: 5002
+      DB_HOST: 192.168.86.220
+      DB_USER: root
+      DB_PORT: 3306
+      DB_PASSWORD: Mookvaal98!
+      DB_NAME: cars
+    volumes:
+      - /run/mysqld/mysqld10.sock:/var/run/mysqld/mysqld10.sock
+      - /var/services/web/cars/uploads:/app/uploads
