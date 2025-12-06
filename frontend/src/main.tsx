@@ -6,7 +6,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
+import CarView from "./pages/CarView";
+import AddVehiclePart from "./pages/AddVehiclePart";
+import EditVehiclePart from "./pages/EditVehiclePart";
 
+import "./axiosSetup";
 import "./index.css";
 
 function App() {
@@ -23,6 +27,32 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path="/vehicle/:id"
+          element={
+            <ProtectedRoute>
+              <CarView />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/vehicles/:id/add-part"
+          element={
+            <ProtectedRoute>
+              <AddVehiclePart />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/vehicles/:vehicleId/vehicle-parts/:partId/edit"
+          element={<EditVehiclePart />}
+        />
+
+
+
 
         {/* redirect "/" → "/dashboard" */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />

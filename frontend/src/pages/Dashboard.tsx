@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaCog, FaPlus } from "react-icons/fa";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Vehicle {
   id: number;
@@ -15,6 +16,8 @@ export default function Dashboard() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [showExtra, setShowExtra] = useState(false);
+  const navigate = useNavigate();
+
 
 
   const [form, setForm] = useState({
@@ -123,8 +126,10 @@ export default function Dashboard() {
         {vehicles.map((v) => (
           <div
             key={v.id}
+            onClick={() => navigate(`/vehicle/${v.id}`)}
             className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition cursor-pointer"
           >
+
             <div className="h-40 bg-gray-200">
               {v.picture_url ? (
                 <img
